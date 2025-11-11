@@ -1,0 +1,231 @@
+[
+    {
+      "id": "node1",
+      "name": "Root Node (Outer Warehouse)",
+      "coords": [295, 1264.5],
+      "category": "Node"
+    },
+    {
+      "id": "node2",
+      "name": "Root Node (Boundless Repository)",
+      "coords": [288, 171.75],
+      "category": "Node"
+    },
+    {
+      "id": "node3",
+      "name": "Root Node (Inner Warehouse)",
+      "coords": [480, 401.5],
+      "category": "Node"
+    },
+    {
+      "id": "boss1",
+      "name": "Yanlao (Sky Rending Claw)",
+      "coords": [288.5, 489],
+      "category": "Boss"
+    },
+    {
+        "id": "boss2",
+        "name": "Celestial Enforcer: Tieyan",
+        "coords": [617.25, 467],
+        "category": "Boss"
+    },
+    {
+      "id": "character1",
+      "name": "Shanhai 9000",
+      "coords": [295, 1324],
+      "category": "Characters"
+    },
+    {
+        "id": "jin1",
+        "name": "Jin Chest",
+        "coords": [324.75, 1322],
+        "category": "Jin"
+    },
+    {
+        "id": "component1",
+        "name": "Advanced Component",
+        "coords": [474, 1305],
+        "category": "Component"
+    },
+    {
+        "id": "component2",
+        "name": "Standard Component",
+        "coords": [396.25, 1036],
+        "category": "Component"
+    },
+    {
+        "id": "component3",
+        "name": "Standard Component",
+        "coords": [288, 201],
+        "category": "Component"
+    },
+    {
+        "id": "component4",
+        "name": "Advanced Component",
+        "coords": [573, 461.75],
+        "category": "Component"
+    },
+    {
+        "id": "jade1",
+        "name": "Breather Jade",
+        "coords": [395, 1110.5],
+        "category": "Jades"
+    },
+    {
+        "id": "jade2",
+        "name": "Qi Swipe Jade",
+        "coords": [288, 214.5],
+        "category": "Jades"
+    },
+    {
+        "id": "hack1",
+        "name": "Hack Point",
+        "coords": [384.25, 971.5],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack2",
+        "name": "Hack Point",
+        "coords": [519.25, 1233.5],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack3",
+        "name": "Hack Point",
+        "coords": [105.25, 135.75],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack4",
+        "name": "Hack Point",
+        "coords": [149, 145],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack5",
+        "name": "Hack Point",
+        "coords": [152.5, 258.75],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack6",
+        "name": "Hack Point",
+        "coords": [103, 274.5],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack7",
+        "name": "Hack Point",
+        "coords": [240.5, 396],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack8",
+        "name": "Hack Point",
+        "coords": [546.5, 545.75],
+        "category": "Hack Points"
+    },
+    {
+        "id": "hack9",
+        "name": "Hack Point",
+        "coords": [582, 225.5],
+        "category": "Hack Points"
+    },
+    {
+        "id": "data1",
+        "name": "Warehouse Database",
+        "coords": [440.25, 1043.25],
+        "category": "Databases"
+    },
+    {
+        "id": "data2",
+        "name": "Ancient Weapon Console",
+        "coords": [325, 198],
+        "category": "Databases"
+    },
+    {
+        "id": "data3",
+        "name": "Hexachrem Vault Scroll",
+        "coords": [288, 227],
+        "category": "Databases"
+    },
+    {
+        "id": "data4",
+        "name": "Dusk Guardian Recording Device 3",
+        "coords": [628.5, 379.75],
+        "category": "Databases"
+    },
+    {
+        "id": "artifact1",
+        "name": "Virtual Reality Device",
+        "coords": [509, 1224.75],
+        "category": "Artifacts"
+    },
+    {
+        "id": "artifact2",
+        "name": "Antique Vinyl Record",
+        "coords": [300, 221.25],
+        "category": "Artifacts"
+    },
+    {
+        "id": "fruit1",
+        "name": "Greater Tao Fruit",
+        "coords": [288.5, 582.5],
+        "category": "Fruit"
+    },
+    {
+        "id": "fruit2",
+        "name": "Tao Fruit",
+        "coords": [628.5, 394],
+        "category": "Fruit"
+    },
+    {
+        "id": "item1",
+        "name": "Thunderburst Bomb",
+        "coords": [325, 173.5],
+        "category": "Key Items"
+    },
+    {
+        "id": "item2",
+        "name": "Firestorm Ring",
+        "coords": [607.5, 467],
+        "category": "Key Items"
+    },
+    {
+        "id": "mat1",
+        "name": "Dark Steel",
+        "coords": [300, 207.5],
+        "category": "Material"
+    },
+    {
+        "id": "mat2",
+        "name": "Herb Catalyst",
+        "coords": [514.25, 418.75],
+        "category": "Material"
+    },
+    {
+        "id": "poison1",
+        "name": "Molted Tianma Hide",
+        "coords": [471.5, 227.25],
+        "category": "Poison"
+    },
+    {
+        "id": "robot1",
+        "name": "Parry Robot",
+        "coords": [609.75, 644.25],
+        "category": "Parry Robots"
+    },
+    {
+        "id": "robot2",
+        "name": "Parry Robot",
+        "coords": [542, 422.75],
+        "category": "Parry Robots"
+    },
+    {
+        "id": "robot3",
+        "name": "Parry Robot",
+        "coords": [608.5, 183],
+        "category": "Parry Robots"
+    }
+  ]
+  

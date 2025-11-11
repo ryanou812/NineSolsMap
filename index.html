@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Nine Sols Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    #controls {
+      position: absolute;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 15px;
+      border-radius: 10px;
+      top: 10px;
+      left: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    #controls label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    #controls input {
+      margin-right: 6px;
+    }
+
+    button {
+      background: #0078ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005ecb;
+    }
+  </style>
+</head>
+<body>
+  <!-- Category Filters -->
+  <div id="controls">
+    <label><input type="checkbox" class="category" value="Node" checked> Root Nodes</label>
+    <label><input type="checkbox" class="category" value="Boss" checked> Bosses</label>
+    <label><input type="checkbox" class="category" value="Characters" checked> Characters</label>
+    <label><input type="checkbox" class="category" value="Key Items" checked> Key Items</label>
+    <label><input type="checkbox" class="category" value="Material" checked> Material</label>
+    <label><input type="checkbox" class="category" value="Databases" checked> Databases</label>
+    <label><input type="checkbox" class="category" value="Fruit" checked> Tao Fruit</label>
+    <label><input type="checkbox" class="category" value="Artifacts" checked> Artifacts</label>
+    <label><input type="checkbox" class="category" value="Poison" checked> Poison</label>
+    <label><input type="checkbox" class="category" value="Jades" checked> Jades</label>
+    <label><input type="checkbox" class="category" value="Jin" checked> Jin</label>
+    <label><input type="checkbox" class="category" value="Component" checked> Components</label>
+    <label><input type="checkbox" class="category" value="Parry Robots" checked> Parry Robots</label>
+    <label><input type="checkbox" class="category" value="Hack Points" checked> Hack Points</label>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Marker Icons
+    const icons = {
+      "Node": L.icon({
+        iconUrl: 'root.png',
+        iconSize: [32, 32], // size of the icon
+        iconAnchor: [16, 32], // point of the icon which corresponds to marker's location
+        popupAnchor: [0, -32] // point from which popup opens relative to the icon
+      }),
+      "Boss": L.icon({
+        iconUrl: 'boss.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Characters": L.icon({
+        iconUrl: 'character.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Jin": L.icon({
+        iconUrl: 'jin.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Component": L.icon({
+        iconUrl: 'component.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Parry Robots": L.icon({
+        iconUrl: 'robot.png',
+        iconSize: [28, 28],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Hack Points": L.icon({
+        iconUrl: 'hack.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Jades": L.icon({
+        iconUrl: 'jade.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Databases": L.icon({
+        iconUrl: 'data.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Artifacts": L.icon({
+        iconUrl: 'artifact.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Fruit": L.icon({
+        iconUrl: 'fruit.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Key Items": L.icon({
+        iconUrl: 'keyitem.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Material": L.icon({
+        iconUrl: 'material.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      }),
+      "Poison": L.icon({
+        iconUrl: 'poison.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+      })
+    };
+
+    // Initialize map with zoom controls top-right
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 2,
+      zoomControl: false
+    });
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    // Image dimensions
+    const imageWidth = 1411;
+    const imageHeight = 698;
+    const bounds = [[0,0], [imageHeight, imageWidth]];
+    L.imageOverlay('game_map.png', bounds).addTo(map);
+    map.fitBounds(bounds);
+
+    // Marker storage
+    const markers = {};       // Unfound markers
+    const foundMarkers = {};  // Found markers
+
+    // Load markers from JSON
+    fetch('markers.json')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(point => {
+          const isFound = localStorage.getItem(`found_${point.id}`) === 'true';
+
+          const marker = L.marker(point.coords, {
+            opacity: isFound ? 0.5 : 1,
+            icon: icons[point.category],
+            title: point.name
+          }).bindPopup(`
+            <b>${point.name}</b><br>
+            <button onclick="toggleFound('${point.id}')">
+              ${isFound ? 'Mark as Not Found' : 'Mark as Found'}
+            </button>
+          `);
+
+          marker.category = point.category;
+
+          if (isFound) {
+            marker.addTo(map);
+            foundMarkers[point.id] = marker;
+          } else {
+            marker.addTo(map);
+            markers[point.id] = marker;
+          }
+        });
+      })
+      .catch(err => console.error("Error loading markers:", err));
+
+    // Toggle found / not found
+    function toggleFound(id) {
+      const marker = markers[id] || foundMarkers[id];
+      if (!marker) return;
+
+      const currentlyFound = localStorage.getItem(`found_${id}`) === 'true';
+
+      if (currentlyFound) {
+        // Move to unfound
+        localStorage.removeItem(`found_${id}`);
+        marker.setOpacity(1);
+
+        marker.unbindPopup();
+        marker.bindPopup(`
+          <b>${marker.options.title}</b><br>
+          <button onclick="toggleFound('${id}')">Mark as Found</button>
+        `);
+
+        delete foundMarkers[id];
+        markers[id] = marker;
+      } else {
+        // Move to found
+        localStorage.setItem(`found_${id}`, 'true');
+        marker.setOpacity(0.5);
+
+        marker.unbindPopup();
+        marker.bindPopup(`
+          <b>${marker.options.title}</b><br>
+          <button onclick="toggleFound('${id}')">Mark as Not Found</button>
+        `);
+
+        delete markers[id];
+        foundMarkers[id] = marker;
+      }
+
+      // Update visibility according to category filters
+      updateMarkersByCategory();
+
+      // Reopen popup so button is visible
+      marker.openPopup();
+    }
+
+    // Filter markers by category
+    function updateMarkersByCategory() {
+      const activeCategories = Array.from(document.querySelectorAll('.category:checked')).map(b => b.value);
+
+      Object.values(markers).forEach(marker => {
+        if (activeCategories.includes(marker.category)) {
+          if (!map.hasLayer(marker)) marker.addTo(map);
+        } else {
+          if (map.hasLayer(marker)) map.removeLayer(marker);
+        }
+      });
+
+      Object.values(foundMarkers).forEach(marker => {
+        if (activeCategories.includes(marker.category)) {
+          if (!map.hasLayer(marker)) marker.addTo(map);
+        } else {
+          if (map.hasLayer(marker)) map.removeLayer(marker);
+        }
+      });
+    }
+
+    document.querySelectorAll('.category').forEach(box => {
+      box.addEventListener('change', updateMarkersByCategory);
+    });
+
+    // Optional: log coordinates when clicking map
+    map.on('click', e => console.log(e.latlng));
+  </script>
+</body>
+</html>
